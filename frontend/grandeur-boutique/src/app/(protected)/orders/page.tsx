@@ -2,11 +2,9 @@
 
 import * as React from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { Package, ChevronRight, Clock } from "lucide-react"
 
 import { Order, OrderStatus } from "@/types/order"
-import { apiClient } from "@/lib/api-client"
 
 export default function OrdersListPage() {
   const [orders, setOrders] = React.useState<Order[]>([])
@@ -24,13 +22,46 @@ export default function OrdersListPage() {
               id: "ORD-9938-XYZ",
               userId: "user_123",
               createdAt: new Date().toISOString(),
-              currentStatus: "SHIPPED",
-              financials: { grandTotal: 2500, subtotal: 2500, shippingFee: 0, discountAmount: 0, taxAmount: 0 },
+              updatedAt: new Date().toISOString(),
+              status: "SHIPPED",
+              subtotal: 2500,
+              taxTotal: 0,
+              shippingFee: 0,
+              discountTotal: 0,
+              grandTotal: 2500,
+              paymentMethod: "ONLINE",
+              paymentStatus: "PAID",
+              shippingAddress: {
+                id: "addr_1",
+                userId: "user_123",
+                type: "HOME",
+                isDefault: true,
+                fullName: "John Doe",
+                phoneNumber: "+91 9876543210",
+                addressLine1: "123 Main Street",
+                addressLine2: "Apartment 4B",
+                city: "Mumbai",
+                state: "Maharashtra",
+                pincode: "400001",
+                country: "India",
+                isGpsVerified: false,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+              },
+              timeline: [],
               items: [
-                { productId: "1", cartItemId: "1-M", title: "The Ivory Pearl Satin Anarkali", size: "M", quantity: 1, priceAtPurchase: 2500, imageUrl: "/mock-dress-1.jpg" }
-              ],
-              // ... other fields omitted for brevity in mock
-            } as Order
+                {
+                    id: "item-1",
+                    productId: "1",
+                    title: "The Ivory Pearl Satin Anarkali",
+                    size: "M",
+                    quantity: 1,
+                    priceAtPurchase: 2500,
+                    taxAmount: 0,
+                    imageUrl: "/mock-dress-1.jpg"
+            }
+        ],
+            }
           ])
           setIsLoading(false)
         }, 1000)
@@ -108,7 +139,7 @@ export default function OrdersListPage() {
                         {formatDate(order.createdAt)}
                       </div>
                     </div>
-                    <StatusBadge status={order.currentStatus} />
+                    <StatusBadge status={order.status} />
                   </div>
 
                   {/* Order Items Summary */}
@@ -116,11 +147,10 @@ export default function OrdersListPage() {
                     <div className="flex items-center gap-3">
                       {/* Image Stacking Logic for multiple items */}
                       <div className="flex -space-x-4">
-                        {order.items.slice(0, 3).map((item, idx) => (
+                        {order.items.slice(0, 3).map((_, idx) => (
                           <div key={idx} className="w-12 h-12 rounded-full border-2 border-white bg-gray-100 overflow-hidden relative shadow-sm">
                              {/* Fallback styling for mock data */}
                              <div className="absolute inset-0 bg-gray-200"></div>
-                             {/* <Image src={item.imageUrl} alt={item.title} fill className="object-cover" /> */}
                           </div>
                         ))}
                         {order.items.length > 3 && (
@@ -130,7 +160,7 @@ export default function OrdersListPage() {
                         )}
                       </div>
                       <div className="text-sm">
-                        <p className="font-bold text-gray-900">{formatRupee(order.financials.grandTotal)}</p>
+                        <p className="font-bold text-gray-900">{formatRupee(order.grandTotal)}</p>
                         <p className="text-gray-500">{order.items.length} {order.items.length === 1 ? 'Item' : 'Items'}</p>
                       </div>
                     </div>

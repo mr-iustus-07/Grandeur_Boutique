@@ -32,17 +32,10 @@ export default function CheckoutPage() {
   const { items, getSubtotal, getTotalDiscount, clearCart } = useCartStore()
 
   // 4. Hydration & Security Check
-  const [isMounted, setIsMounted] = React.useState(false)
-  React.useEffect(() => {
-    setIsMounted(true)
-    // If they bypass the funnel and cart is empty, send them back
-    if (items.length === 0 && !isSuccess) {
-      router.push("/cart")
-    }
-  }, [items.length, isSuccess, router])
+  const isMounted= true
 
   const subtotal = getSubtotal()
-  const discount = getTotalDiscount()
+  const applyDiscount = getTotalDiscount()
   const deliveryFee = subtotal > 10000 ? 0 : 150 // Free delivery over ₹10k
   const grandTotal = subtotal + deliveryFee
 

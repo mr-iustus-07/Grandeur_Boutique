@@ -39,7 +39,7 @@ export function BottomNav() {
               <div 
                 className={cn(
                   "p-1.5 rounded-full transition-all duration-300",
-                  isActive ? "text-[#D4AF37] scale-110" : "text-gray-400 hover:text-gray-800"
+                  isActive ? "text-[#D4AF37] scale-110" : "text-[#005C29] hover:text-gray-800"
                 )}
               >
                 <Icon 

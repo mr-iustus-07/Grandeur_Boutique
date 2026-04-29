@@ -21,7 +21,7 @@ const addressSchema = z.object({
   city: z.string().min(2, "City is required"),
   state: z.string().min(2, "State is required"),
   pincode: z.string().regex(/^[1-9][0-9]{5}$/, "Must be a valid 6-digit Pincode"),
-  isGpsVerified: z.boolean().default(false),
+  isGpsVerified: z.boolean(),
   coordinates: z.object({
     lat: z.number(),
     lng: z.number()
@@ -121,7 +121,7 @@ export default function AddressPage() {
           variant="outline" 
           className="w-full h-14 bg-white text-[#005C29] border-[#005C29]/20 hover:bg-[#005C29]/5 shadow-sm"
           onClick={handleUseLocation}
-          isLoading={isLocating}
+          disabled={isLocating}
         >
           <Navigation size={18} className="mr-2" />
           {isLocating ? "Locating you..." : "Use My Current Location"}
@@ -192,7 +192,7 @@ export default function AddressPage() {
               <Button 
                 type="submit" 
                 className="w-full"
-                isLoading={isSubmitting}
+                disabled={isSubmitting}
               >
                 Save & Continue to Payment
               </Button>

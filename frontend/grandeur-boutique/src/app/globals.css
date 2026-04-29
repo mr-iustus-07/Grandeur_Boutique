@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Grandeur Brand Variables (RGB format for Tailwind opacity support) */
+    --grandeur-green: 0 92 41;   /* #005C29 */
+    --grandeur-gold: 212 175 55; /* #D4AF37 */
+    
+    --background: 255 255 255;
+    --foreground: 17 24 39;
+  }
+
+  html,
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background-color: rgb(var(--grandeur-gold) / 0.3);
+    color: rgb(var(--foreground));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .min-h-safe {
+    min-height: calc(100vh - env(safe-area-inset-bottom) - env(safe-area-inset-top));
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    /* scrollbar-width: none; */
+  }
+
+  .text-balance {
+    /* text-wrap: balance; */
+  }
+
+  /* ✅ FIXED GLASS PANEL */
+  .glass-panel {
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  @apply shadow-sm;
+}
+
+
+#__next {
+  @apply min-h-screen flex flex-col;
+}}

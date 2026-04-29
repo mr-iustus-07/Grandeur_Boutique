@@ -2,7 +2,7 @@
 import React from 'react';
 import type { LucideIcon } from 'lucide-react'; // Example: using lucide-react
 
-export type IconType = LucideIcon | React.ComponentType<any>;
+export type IconType = LucideIcon | React.ComponentType<unknown>;
 
 interface IconProps extends React.SVGAttributes<SVGElement> {
   icon: IconType;

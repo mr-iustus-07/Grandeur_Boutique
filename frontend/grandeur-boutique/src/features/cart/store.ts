@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"
-import { Product } from "@/types/product" // Assuming you have this defined
+import { ProductSize} from "@/types/product" // Assuming you have this defined
 
 // 1. Define the Cart Item
 // We extend the base Product to include cart-specific data
@@ -11,7 +11,7 @@ export interface CartItem {
   price: number;
   originalPrice?: number;
   imageUrl: string;
-  size: string;
+  size: ProductSize; // e.g., "S", "M", "L", "XL"
   quantity: number;
 }
 

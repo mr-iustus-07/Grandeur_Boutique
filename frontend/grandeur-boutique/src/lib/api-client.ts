@@ -1,9 +1,9 @@
 // Define a custom Error class so we can catch specific API failures easily
 export class ApiError extends Error {
   status: number;
-  data: any;
+  data: unknown;
 
-  constructor(status: number, message: string, data?: any) {
+  constructor(status: number, message: string, data?: unknown) {
     super(message);
     this.status = status;
     this.data = data;
@@ -77,13 +77,13 @@ export const apiClient = {
   get: <T>(endpoint: string, options?: CustomRequestInit) =>
     fetcher<T>(endpoint, { ...options, method: "GET" }),
 
-  post: <T>(endpoint: string, body: any, options?: CustomRequestInit) =>
+  post: <T>(endpoint: string, body: unknown, options?: CustomRequestInit) =>
     fetcher<T>(endpoint, { ...options, method: "POST", body: JSON.stringify(body) }),
 
-  put: <T>(endpoint: string, body: any, options?: CustomRequestInit) =>
+  put: <T>(endpoint: string, body: unknown, options?: CustomRequestInit) =>
     fetcher<T>(endpoint, { ...options, method: "PUT", body: JSON.stringify(body) }),
 
-  patch: <T>(endpoint: string, body: any, options?: CustomRequestInit) =>
+  patch: <T>(endpoint: string, body: unknown, options?: CustomRequestInit) =>
     fetcher<T>(endpoint, { ...options, method: "PATCH", body: JSON.stringify(body) }),
 
   delete: <T>(endpoint: string, options?: CustomRequestInit) =>
